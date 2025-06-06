@@ -178,7 +178,7 @@ class _MicrosoftGraph {
    * @returns the id if such a user exists, null otherwise
    */
   async _getUserIdFromEmail(email: string): Promise<string | null> {
-    if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    if (!email.match(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/)) {
       throw "Email is malformed";
     }
 
