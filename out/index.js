@@ -234,7 +234,7 @@ var _MicrosoftGraph = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+                        if (!email.match(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/)) {
                             throw "Email is malformed";
                         }
                         return [4 /*yield*/, this.msGraph
