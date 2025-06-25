@@ -292,7 +292,7 @@ var _MicrosoftGraph = /** @class */ (function () {
                     case 2:
                         if (!(i < allGroups.length)) return [3 /*break*/, 5];
                         g = allGroups[i];
-                        return [4 /*yield*/, this.listGroupMembers(g.id)];
+                        return [4 /*yield*/, this.listGroupMembers(g.principalId)];
                     case 3:
                         allGroupUsersRes = _a.sent();
                         allUsersId = __spreadArray(__spreadArray([], allUsersId, true), allGroupUsersRes.map(function (u) { return u.id; }), true);

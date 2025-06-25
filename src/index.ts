@@ -219,7 +219,7 @@ class _MicrosoftGraph {
     const allGroups = allPrincipalsRes.value.filter((u: any) => u.principalType === "Group");
     for (let i = 0; i < allGroups.length; i++) {
       const g = allGroups[i];
-      const allGroupUsersRes = await this.listGroupMembers(g.id);
+      const allGroupUsersRes = await this.listGroupMembers(g.principalId);
       allUsersId = [...allUsersId, ...allGroupUsersRes.map((u) => u.id)];
     }
     return allUsersId;
