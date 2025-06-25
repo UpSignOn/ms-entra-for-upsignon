@@ -2,7 +2,7 @@
   // Change this to match your project
   "include": ["src/index.ts"],
   "compilerOptions": {
-    "lib": ["es2015"],
+    "lib": ["es2015", "DOM"],
     "module": "CommonJS",
     "skipLibCheck": true,
     // Tells TypeScript to read JS files, as
