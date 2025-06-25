@@ -258,7 +258,7 @@ var _MicrosoftGraph = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.msGraph
-                            .api("/users/".concat(userId, "/appRoleAssignments"))
+                            .api("/users/".concat(userId, "/appRoleAssignments")) // this also works if the user is a direct member of a group assigned to UpSignOn
                             .header("ConsistencyLevel", "eventual")
                             .filter("resourceId eq ".concat(this.appResourceId))
                             .get()];
