@@ -254,17 +254,13 @@ var _MicrosoftGraph = /** @class */ (function () {
     };
     _MicrosoftGraph.prototype.isUserAuthorizedForUpSignOn = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var appRoleAssignments;
+            var allAuthorizedUserIds;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.msGraph
-                            .api("/users/".concat(userId, "/appRoleAssignments")) // this also works if the user is a direct member of a group assigned to UpSignOn
-                            .header("ConsistencyLevel", "eventual")
-                            .filter("resourceId eq ".concat(this.appResourceId))
-                            .get()];
+                    case 0: return [4 /*yield*/, this.getAllUsersAssignedToUpSignOn()];
                     case 1:
-                        appRoleAssignments = _a.sent();
-                        return [2 /*return*/, appRoleAssignments.value.filter(function (as) { return !as.deletedDateTime; }).length > 0];
+                        allAuthorizedUserIds = _a.sent();
+                        return [2 /*return*/, allAuthorizedUserIds.indexOf(userId) >= 0];
                 }
             });
         });

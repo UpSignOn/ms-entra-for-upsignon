@@ -195,16 +195,16 @@ class _MicrosoftGraph {
 
   async isUserAuthorizedForUpSignOn(userId: string): Promise<boolean> {
     // PERMISSION = Directory.Read.All
-    const appRoleAssignments = await this.msGraph
-      .api(`/users/${userId}/appRoleAssignments`) // this also works if the user is a direct member of a group assigned to UpSignOn
-      .header("ConsistencyLevel", "eventual")
-      .filter(`resourceId eq ${this.appResourceId}`)
-      .get();
-    return appRoleAssignments.value.filter((as: any) => !as.deletedDateTime).length > 0;
+    // const appRoleAssignments = await this.msGraph
+    //   .api(`/users/${userId}/appRoleAssignments`) // this also works if the user is a direct member of a group assigned to UpSignOn
+    //   .header("ConsistencyLevel", "eventual")
+    //   .filter(`resourceId eq ${this.appResourceId}`)
+    //   .get();
+    // return appRoleAssignments.value.filter((as: any) => !as.deletedDateTime).length > 0;
 
     // ALTERNATIVE METHOD
-    // const allAuthorizedUserIds = await this.getAllUsersAssignedToUpSignOn();
-    // return allAuthorizedUserIds.indexOf(userId) >= 0;
+    const allAuthorizedUserIds = await this.getAllUsersAssignedToUpSignOn();
+    return allAuthorizedUserIds.indexOf(userId) >= 0;
   }
 
   async getAllUsersAssignedToUpSignOn(): Promise<string[]> {
