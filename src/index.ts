@@ -186,7 +186,7 @@ class _MicrosoftGraph {
       // PERMISSION = User.Read.All OR Directory.Read.All
       .api("/users")
       .header("ConsistencyLevel", "eventual")
-      .filter(`mail eq '${email}' or otherMails/any(oe:oe eq '${email}')`)
+      .filter(`mail eq '${email}' or userPrincipalName eq '${email}' or otherMails/any(oe:oe eq '${email}')`)
       .select(["id"])
       .get();
     const userId = users.value[0]?.id;

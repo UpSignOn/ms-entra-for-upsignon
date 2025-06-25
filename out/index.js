@@ -241,7 +241,7 @@ var _MicrosoftGraph = /** @class */ (function () {
                                 // PERMISSION = User.Read.All OR Directory.Read.All
                                 .api("/users")
                                 .header("ConsistencyLevel", "eventual")
-                                .filter("mail eq '".concat(email, "' or otherMails/any(oe:oe eq '").concat(email, "')"))
+                                .filter("mail eq '".concat(email, "' or userPrincipalName eq '").concat(email, "' or otherMails/any(oe:oe eq '").concat(email, "')"))
                                 .select(["id"])
                                 .get()];
                     case 1:
