@@ -234,12 +234,12 @@ class _MicrosoftGraph {
    */
   async getGroupsForUser(userId: string): Promise<EntraGroup[]> {
     const groups = await this.msGraph
-      // Get groups, directory roles, and administrative units that the user is a direct member of. This operation isn't transitive. To retrieve groups, directory roles, and administrative units that the user is a member through transitive membership, use the List user transitive memberOf API.
+      // Get groups, directory roles, and administrative units that the user is a transitive member of.
       // PERMISSION = Directory.Read.All OR GroupMember.Read.All OR Directory.Read.All
       // https://learn.microsoft.com/en-us/graph/api/user-list-memberof?view=graph-rest-1.0&tabs=http
       // .api(`/users/${userId}/memberOf`) // pour tout avoir
       // .api(`/users/${userId}/memberOf/microsoft.graph.administrativeUnit`) // pour avoir tous les administrativeUnit
-      .api(`/users/${userId}/memberOf/microsoft.graph.group`) // pour avoir tous les groupes
+      .api(`/users/${userId}/transitiveMemberOf/microsoft.graph.group`) // pour avoir tous les groupes
       .header("ConsistencyLevel", "eventual")
       .select(["id", "displayName"])
       .get();
@@ -252,11 +252,11 @@ class _MicrosoftGraph {
    * @returns
    */
   async listGroupMembers(groupId: string): Promise<{ id: string; displayName: string }[]> {
-    // Get a list of the group's direct members. A group can have users, organizational contacts, devices, service principals and other groups as members. This operation is not transitive.
+    // Get a list of the group's transitive members. A group can have users, organizational contacts, devices, service principals and other groups as members. This operation is not transitive.
     // PERMISSION = GroupMember.Read.All OR Group.Read.All OR Directory.Read.All
     // https://learn.microsoft.com/en-us/graph/api/group-list-members?view=graph-rest-1.0&tabs=http
     const groupMembers = await this.msGraph
-      .api(`/groups/${groupId}/members/microsoft.graph.user/`)
+      .api(`/groups/${groupId}/transitiveMembers/microsoft.graph.user/`)
       .header("ConsistencyLevel", "eventual")
       .select(["id", "mail", "displayName"])
       .get();

@@ -318,12 +318,12 @@ var _MicrosoftGraph = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.msGraph
-                            // Get groups, directory roles, and administrative units that the user is a direct member of. This operation isn't transitive. To retrieve groups, directory roles, and administrative units that the user is a member through transitive membership, use the List user transitive memberOf API.
+                            // Get groups, directory roles, and administrative units that the user is a transitive member of.
                             // PERMISSION = Directory.Read.All OR GroupMember.Read.All OR Directory.Read.All
                             // https://learn.microsoft.com/en-us/graph/api/user-list-memberof?view=graph-rest-1.0&tabs=http
                             // .api(`/users/${userId}/memberOf`) // pour tout avoir
                             // .api(`/users/${userId}/memberOf/microsoft.graph.administrativeUnit`) // pour avoir tous les administrativeUnit
-                            .api("/users/".concat(userId, "/memberOf/microsoft.graph.group")) // pour avoir tous les groupes
+                            .api("/users/".concat(userId, "/transitiveMemberOf/microsoft.graph.group")) // pour avoir tous les groupes
                             .header("ConsistencyLevel", "eventual")
                             .select(["id", "displayName"])
                             .get()];
@@ -344,7 +344,7 @@ var _MicrosoftGraph = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.msGraph
-                            .api("/groups/".concat(groupId, "/members/microsoft.graph.user/"))
+                            .api("/groups/".concat(groupId, "/transitiveMembers/microsoft.graph.user/"))
                             .header("ConsistencyLevel", "eventual")
                             .select(["id", "mail", "displayName"])
                             .get()];
